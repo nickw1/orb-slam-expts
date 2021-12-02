@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!-- Experimenting with sending the video stream to C++. Will be used as a
+     starting point for playing around with ORB-SLAM. Based on PTAM experiments 
+     C++ is in ocvcpp directory. -->
+<html>
+<head>
+<title>ptam test</title>
+</head>
+
+<body>
+<h1>PTAM Test</h1>
+<div id='status' style='width: 640px; background-color: black; color: white; font-size: 120%; margin-bottom: 10px'></div>
+<video id='video1' width='640' height='480'></video>
+<canvas id='canvas1' width='640' height='480' style='display: none'></canvas>
+<div>
+<input type="button" id='start' value="Start Tracking" />
+<input type="button" id='captureKeyFrame' value="Capture Key Frame 1" disabled />
+<input type="button" id='stop' value="Stop Tracking" disabled />
+<input type="button" id='cleanup' value="Cleanup" />
+</div>
+<script type='text/javascript' src='wasm/orb_wasm.js'></script>
+<script type='text/javascript' src='index.js'></script>
+</body>
+</html>
