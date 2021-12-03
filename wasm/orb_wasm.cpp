@@ -7,6 +7,9 @@
 #include <iostream>
 #include <emscripten/bind.h>
 #include <vector>
+#include <chrono>
+#include <System.h>
+
 
 
 //using namespace emscripten;
@@ -22,8 +25,12 @@ extern "C" {
       EMSCRIPTEN_KEEPALIVE void captureKeyFrame();
 }
 
+ORB_SLAM3::System *slam;
+
 int main(int argc, char *argv[]) {
     cout << "initialising orb-slam system..." << endl;
+
+    slam = new ORB_SLAM3::System("", "", ORB_SLAM3::System::MONOCULAR, false);
     
     return 0;
 }
@@ -40,7 +47,10 @@ extern "C" EMSCRIPTEN_KEEPALIVE bool receiveData(uint8_t *ptr, int width, int he
 //    cv::cvtColor(cv_image, cv_image, cv::COLOR_BGR2RGB);
 
     cv::cvtColor(cv_image, gray_image, cv::COLOR_RGB2GRAY);
-
+    
+    std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
+    std::chrono::duration<double, std::milli> dur = t1.time_since_epoch();
+    slam->TrackMonocular(gray_image, dur.count());
 }
 
 // simulate the 'space press'...
@@ -49,5 +59,7 @@ extern "C" EMSCRIPTEN_KEEPALIVE void captureKeyFrame() {
 }
 
 extern "C"   EMSCRIPTEN_KEEPALIVE void cleanup() {
+    slam->Shutdown();
+    delete slam;
 }
 
