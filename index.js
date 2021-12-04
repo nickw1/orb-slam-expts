@@ -8,44 +8,31 @@ let active = false, nKeyFrames = 0;
 let ptr;
 let pollHandle = null;
 let poseMatrix = null; 
+let processVideoHandle = null;
 
 navigator.mediaDevices.getUserMedia({video: true}).then (stream => {
     video1.srcObject = stream;
     video1.play();
-    setTimeout(processVideo, 500);    
     document.getElementById("start").addEventListener("click", e=> {
+        processVideoHandle = setTimeout(processVideo, 500);    
         document.getElementById("start").setAttribute("disabled", true);
-        if(nKeyFrames === 0) {
-            status('Press the button to capture the first key frame.');
-            document.getElementById("captureKeyFrame").removeAttribute("disabled");
-        }
         document.getElementById("stop").removeAttribute("disabled");
         active = true;
         pollHandle = setInterval(pollORB, 30000);
-    });
-    document.getElementById("captureKeyFrame").addEventListener("click", e=> {
-        const ret = Module._captureKeyFrame();    
-        console.log(`_captureKeyFrame() returned: ${ret}`);
-        if(++nKeyFrames == 1) {
-            status('Press the button again to capture the next keyframe.');
-            document.getElementById("captureKeyFrame").value = 'Capture key frame 2';
-        } else {
-            status('Both keyframes captured, tracking...');
-            document.getElementById("captureKeyFrame").setAttribute("disabled", true);
-        }
     });
     document.getElementById("stop").addEventListener("click", e=> {
         active = false;
         document.getElementById("start").removeAttribute("disabled");
         document.getElementById("stop").setAttribute("disabled", true);
         clearInterval(pollHandle);
+        clearTimeout(processVideoHandle);
         pollHandle = null;
+        processVideoHandle = null;
     });
     document.getElementById("cleanup").addEventListener("click", e=> {
         Module._cleanup();
         Module._free(ptr);
         document.getElementById("start").setAttribute("disabled", true);
-        document.getElementById("captureKeyFrame").setAttribute("disabled", true);
         document.getElementById("stop").setAttribute("disabled", true);
         document.getElementById("cleanup").setAttribute("disabled", true);
         console.log('memory freed');
@@ -61,7 +48,7 @@ function processVideo() {
         wasmPassLast = wasmPassTime;
     }
     const delay = 1000/FPS - (Date.now() - begin);
-    setTimeout(processVideo, delay);
+    processVideoHandle = setTimeout(processVideo, delay);
 }
 
 function sendCanvas(canvas) {

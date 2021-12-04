@@ -25,12 +25,14 @@ include_directories( ${opencv_include_modules} "${orbdir}/include" ${orbdir} ${e
 add_compile_options("-pthread")
 add_link_options("-pthread")
 
+add_link_options("SHELL: --preload-file assets")
 add_compile_options("-fexceptions")
 add_compile_options("SHELL: -s USE_ZLIB=1")
 #add_link_options("-s LLD_REPORT_UNDEFINED")
 add_link_options("-fexceptions")
 #add_link_options("-s INITIAL_MEMORY=32000000")
-add_link_options("-s ALLOW_MEMORY_GROWTH=1")
+add_link_options("SHELL: -s ALLOW_MEMORY_GROWTH=1")
+#add_link_options("SHELL: -s INITIAL_MEMORY=134217728")
 # the below is useful to debug pointer errors but doesn't seem to link properly
 # https://emscripten.org/docs/debugging/Sanitizers.html 
 #add_link_options("-fsanitize=address")
