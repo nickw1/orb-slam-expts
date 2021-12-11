@@ -65,13 +65,7 @@ function passToWasm(data, width, height) {
     }
     Module.HEAPU8.set(data, ptr);
     try {
-        const needReset = Module._receiveData(ptr, width, height);
-        if(needReset) {
-            nKeyFrames = 0;
-            document.getElementById("captureKeyFrame").removeAttribute("disabled");
-            document.getElementById("captureKeyFrame").value = 'Capture key frame 1';
-            status('Could not track - resetting, please capture first key frame again.');
-        }
+        Module._receiveData(ptr, width, height);
     } catch(e) { 
        console.log(e); 
     }

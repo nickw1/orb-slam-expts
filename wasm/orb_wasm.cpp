@@ -70,18 +70,21 @@ extern "C" EMSCRIPTEN_KEEPALIVE bool receiveData(uint8_t *ptr, int width, int he
     vector<ORB_SLAM3::MapPoint*> points = slam->GetTrackedMapPoints();
     cout << "Got " << points.size() << " tracked map points." << endl;
     mapPoints.reserve(points.size() * sizeof(double) * 3);
+    int nWorldPosFound = 0;
     for(int i=0; i<points.size(); i++) {
         cv::Mat worldPos = points[i]->GetWorldPos();
-		cout << "Mat for worldPos at index " << i << " is: " << worldPos << endl;
-        for(int j=0; j<3; j++) {
-            mapPoints.push_back(worldPos.at<double>(j));
+        if(worldPos.total() > 0) {
+            nWorldPosFound++;
+            for(int j=0; j<3; j++) {
+                mapPoints.push_back(worldPos.at<double>(j));
+            }
         }
     }
-    cout << "Map points to be returned:" << endl;
+    cout << "Number of world positions found=" << nWorldPosFound << ". Map points to be returned:" << endl;
     for(int i=0; i<mapPoints.size(); i++) {
         cout << mapPoints[i] <<" " ;
+        if(i % 3 == 2) cout << endl;    
     }
-    cout << endl;
     isProcessingFrame = false;
     return true;
 }
