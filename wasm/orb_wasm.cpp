@@ -72,6 +72,7 @@ extern "C" EMSCRIPTEN_KEEPALIVE bool receiveData(uint8_t *ptr, int width, int he
     mapPoints.reserve(points.size() * sizeof(double) * 3);
     for(int i=0; i<points.size(); i++) {
         cv::Mat worldPos = points[i]->GetWorldPos();
+		cout << "Mat for worldPos at index " << i << " is: " << worldPos << endl;
         for(int j=0; j<3; j++) {
             mapPoints.push_back(worldPos.at<double>(j));
         }
