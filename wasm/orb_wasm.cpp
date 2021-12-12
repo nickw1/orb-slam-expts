@@ -7,7 +7,8 @@
 #include <emscripten/bind.h>
 #include <vector>
 #include <chrono>
-#include <System.h>
+#include "System.h"
+#include "Atlas.h"
 
 
 
@@ -49,7 +50,7 @@ int main(int argc, char *argv[]) {
 extern "C" EMSCRIPTEN_KEEPALIVE bool receiveData(uint8_t *ptr, int width, int height) {
     if(isProcessingFrame) return false;
     isProcessingFrame = true;
-    cout << "receiveData()" << endl;
+    cout << endl << "================ New Frame ================" << endl;
     auto cv_image = cv::Mat(width, height, CV_8UC4, ptr);
     
     cv::Mat gray_image;
@@ -67,6 +68,8 @@ extern "C" EMSCRIPTEN_KEEPALIVE bool receiveData(uint8_t *ptr, int width, int he
     // Get map points, same general technique as for PTAM
     // This may well be from a previous frame, as it's thread-based
     mapPoints.clear();
+    cout << "Tracking state: " << slam->GetTrackingState() << " Lost? " << slam->isLost() << endl;
+    // GetTrackingState(), isLost(), isFinished()
     vector<ORB_SLAM3::MapPoint*> points = slam->GetTrackedMapPoints();
     cout << "Got " << points.size() << " tracked map points." << endl;
     mapPoints.reserve(points.size() * sizeof(double) * 3);
@@ -80,11 +83,22 @@ extern "C" EMSCRIPTEN_KEEPALIVE bool receiveData(uint8_t *ptr, int width, int he
             }
         }
     }
-    cout << "Number of world positions found=" << nWorldPosFound << ". Map points to be returned:" << endl;
-    for(int i=0; i<mapPoints.size(); i++) {
-        cout << mapPoints[i] <<" " ;
-        if(i % 3 == 2) cout << endl;    
+    // Have provided accessor method to Atlas as want to experiment with it.
+    // In desktop ORB-SLAM3, the Atlas is provided to the viewer for rendering
+    // However in the web version we need to access it here to pass the data
+    // back to the front end.
+    ORB_SLAM3::Atlas *atlas = slam->getAtlas();
+    vector<ORB_SLAM3::MapPoint*> allPoints = atlas->GetAllMapPoints();
+    cout << "From atlas, there are " << allPoints.size() << " points." << endl;
+
+    int nAllWorldPosFound = 0;
+    for(int i=0; i<allPoints.size(); i++) {
+        cv::Mat worldPos = allPoints[i]->GetWorldPos();
+        if(worldPos.total() > 0) {
+            nAllWorldPosFound++;
+        }
     }
+    cout << "Number of world positions found=" << nWorldPosFound << ".  Number of world positions from atlas found=" << nAllWorldPosFound << endl;
     isProcessingFrame = false;
     return true;
 }
