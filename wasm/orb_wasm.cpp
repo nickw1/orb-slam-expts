@@ -42,7 +42,7 @@ bool isProcessingFrame = false;
 int main(int argc, char *argv[]) {
     cout << "initialising orb-slam system..." << endl;
 
-    slam = new ORB_SLAM3::System("assets/ORBvoc.bin", "assets/EuRoC.yaml", ORB_SLAM3::System::MONOCULAR, false);
+    slam = new ORB_SLAM3::System("assets/ORBvoc.bin", "assets/Pixel3.yaml", ORB_SLAM3::System::MONOCULAR, false);
     
     return 0;
 }

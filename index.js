@@ -1,8 +1,9 @@
 const canvas1 = document.getElementById('canvas1');
 const ctx = canvas1.getContext('2d');
 const video1 = document.getElementById('video1');
-const width = 640, height = 480;
-const FPS = 30;
+const width = 480, height = 640;
+//const FPS = 30;
+const FPS = 10;
 let wasmPassTime, wasmPassLast = 0;
 let active = false, nKeyFrames = 0; 
 let ptr;
@@ -10,7 +11,7 @@ let pollHandle = null;
 let poseMatrix = null; 
 let processVideoHandle = null;
 
-navigator.mediaDevices.getUserMedia({video: true}).then (stream => {
+navigator.mediaDevices.getUserMedia({video: {facingMode: 'environment'}}).then (stream => {
     video1.srcObject = stream;
     video1.play();
     document.getElementById("start").addEventListener("click", e=> {
@@ -43,7 +44,8 @@ function processVideo() {
     const begin = Date.now();
     ctx.drawImage(video1, 0, 0, width, height);
     wasmPassTime = Date.now();
-    if(active && wasmPassTime - wasmPassLast > 1000) {
+    //if(active && wasmPassTime - wasmPassLast > 1000) {
+	if(true) {
         sendCanvas(document.getElementById('canvas1'));
         wasmPassLast = wasmPassTime;
     }
