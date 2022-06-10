@@ -3,6 +3,8 @@
 #--------------------------------------------------------------------------------------------
 # Camera Parameters. Adjust them!
 #--------------------------------------------------------------------------------------------
+
+# 220610 CURRENT PARAMETERS ARE FROM THE OFFICIAL OPENCV ANDROID CALIBRATOR SAMPLE APP 
 Camera.type: "PinHole"
 
 # Parameters from ptam, possibly from Thorsten
@@ -24,32 +26,32 @@ Camera.type: "PinHole"
 # Used calculations above with ptam parameters to work them out
 # Camera.fx: 458.654
 # Camera.fx: 1029.69920
-Camera.fx: 540.0
+Camera.fx: 1034.0
 # Camera.fy: 457.296
 # Camera.fy: 1013.51520
-Camera.fy: 540.0
+Camera.fy: 1034.0
 # Camera.cx: 367.215
 # Camera.cx: 327.281120
-Camera.cx : 240.0
+Camera.cx : 640.0
 # Camera.cy: 248.375
 # Camera.cy: 209.124160
-Camera.cy : 320.0
+Camera.cy : 384.0
 
 # Distortion parameters. Not sure about these, are not specified in ptam in the same way, leave for now
 # Camera.k1: -0.28340811
 # Camera.k2: 0.07395907
 # Camera.p1: 0.00019359
 # Camera.p2: 1.76187114e-05
-Camera.k1: 0.35
-Camera.k2: -2.4
-Camera.p1: -0.002
+Camera.k1: 0.3164
+Camera.k2: -1.928
+Camera.p1: 0.0
 Camera.p2: 0.0
-Camera.k3: 5.0
+Camera.k3: 3.909
 
 # Camera.width: 640
 # Camera.height: 480
-Camera.width: 480
-Camera.height: 640
+Camera.width: 640
+Camera.height: 480
 
 # Camera frames per second 
 # Camera.fps: 20.0

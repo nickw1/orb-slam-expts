@@ -1,7 +1,7 @@
 const canvas1 = document.getElementById('canvas1');
 const ctx = canvas1.getContext('2d');
 const video1 = document.getElementById('video1');
-const width = 480, height = 640;
+const width = 640, height = 480;
 //const FPS = 30;
 const FPS = 10;
 let wasmPassTime, wasmPassLast = 0;
