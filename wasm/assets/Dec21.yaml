@@ -1,0 +1,81 @@
+%YAML:1.0
+
+#--------------------------------------------------------------------------------------------
+# Camera Parameters. Adjust them!
+#--------------------------------------------------------------------------------------------
+Camera.type: "PinHole"
+
+# Parameters from ptam, possibly from Thorsten
+# mgvvCameraParams[0] = 1.59328; - for focal length
+# mgvvCameraParams[1] = 2.11149; 
+# mgvvCameraParams[2] = 0.512158; - for center 
+# mgvvCameraParams[3] = 0.436717; 
+# mgvvCameraParams[4] = 0.961982;  
+#
+#
+# Calculations from ptam
+#  // First: Focal length and image center in pixel coordinates
+#  mvFocal[0] = mvImageSize[0] * mgvvCameraParams[0];
+#  mvFocal[1] = mvImageSize[1] * mgvvCameraParams[1];
+#  mvCenter[0] = mvImageSize[0] * mgvvCameraParams[2] - 0.5;
+#  mvCenter[1] = mvImageSize[1] * mgvvCameraParams[3] - 0.5;
+
+# Camera calibration and distortion parameters (OpenCV) 
+# Used calculations above with ptam parameters to work them out
+#Camera.fx: 458.654
+Camera.fx: 1019.69920
+#Camera.fy: 457.296
+Camera.fy: 1013.51520
+#Camera.cx: 367.215
+Camera.cx: 327.281120
+#Camera.cy: 248.375
+Camera.cy: 209.124160
+
+# Distortion parameters. Not sure about these, are not specified in ptam in the same way, leave for now
+Camera.k1: -0.28340811
+Camera.k2: 0.07395907
+Camera.p1: 0.00019359
+Camera.p2: 1.76187114e-05
+
+Camera.width: 640
+Camera.height: 480
+
+# Camera frames per second 
+Camera.fps: 20.0
+
+# Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
+Camera.RGB: 1
+
+#--------------------------------------------------------------------------------------------
+# ORB Parameters
+#--------------------------------------------------------------------------------------------
+
+# ORB Extractor: Number of features per image
+ORBextractor.nFeatures: 1000
+
+# ORB Extractor: Scale factor between levels in the scale pyramid 	
+ORBextractor.scaleFactor: 1.2
+
+# ORB Extractor: Number of levels in the scale pyramid	
+ORBextractor.nLevels: 8
+
+# ORB Extractor: Fast threshold
+# Image is divided in a grid. At each cell FAST are extracted imposing a minimum response.
+# Firstly we impose iniThFAST. If no corners are detected we impose a lower value minThFAST
+# You can lower these values if your images have low contrast			
+ORBextractor.iniThFAST: 20
+ORBextractor.minThFAST: 7
+
+#--------------------------------------------------------------------------------------------
+# Viewer Parameters
+#---------------------------------------------------------------------------------------------
+Viewer.KeyFrameSize: 0.05
+Viewer.KeyFrameLineWidth: 1
+Viewer.GraphLineWidth: 0.9
+Viewer.PointSize: 2
+Viewer.CameraSize: 0.08
+Viewer.CameraLineWidth: 3
+Viewer.ViewpointX: 0
+Viewer.ViewpointY: -0.7
+Viewer.ViewpointZ: -1.8
+Viewer.ViewpointF: 500
