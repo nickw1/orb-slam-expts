@@ -46,7 +46,7 @@ add_link_options("SHELL: -s ALLOW_MEMORY_GROWTH=1")
 
 # from @carlodek https://github.com/raulmur/ORB_SLAM2/issues/264
 add_link_options("-O1")
-add_link_options("SHELL: -s MAXIMUM_MEMORY=4GB")
+add_link_options("SHELL: -s MAXIMUM_MEMORY=1GB")
 add_link_options("SHELL: -s NO_EXIT_RUNTIME=1")
 add_link_options("SHELL: --preload-file assets")
 add_link_options("--use-preload-plugins")
