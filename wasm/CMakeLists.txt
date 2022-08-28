@@ -26,8 +26,7 @@ include_directories( ${opencv_include_modules} "${orbdir}/include" ${orbdir} ${e
 add_compile_options("-pthread")
 add_link_options("-pthread")
 
-add_compile_options("-O1")
-add_compile_options("-gsource-map")
+add_compile_options("-g")
 add_compile_options("-fexceptions")
 add_compile_options("SHELL: -s USE_ZLIB=1")
 add_link_options("SHELL: -s SAFE_HEAP=1")
@@ -36,6 +35,7 @@ add_link_options("SHELL: -s PTHREAD_POOL_SIZE=8")
 add_link_options("-fexceptions")
 #add_link_options("-s INITIAL_MEMORY=32000000")
 add_link_options("SHELL: -s ALLOW_MEMORY_GROWTH=1")
+add_link_options("-gsource-map")
 #add_link_options("SHELL: -s INITIAL_MEMORY=134217728")
 # the below is useful to debug pointer errors but doesn't seem to link properly
 # https://emscripten.org/docs/debugging/Sanitizers.html 
@@ -45,12 +45,13 @@ add_link_options("SHELL: -s ALLOW_MEMORY_GROWTH=1")
 #add_link_options("-s LLD_REPORT_UNDEFINED")
 
 # from @carlodek https://github.com/raulmur/ORB_SLAM2/issues/264
-add_link_options("-O1")
 add_link_options("SHELL: -s MAXIMUM_MEMORY=1GB")
 add_link_options("SHELL: -s NO_EXIT_RUNTIME=1")
+add_link_options("SHELL: -s ASSERTIONS=2")
 add_link_options("SHELL: --preload-file assets")
 add_link_options("--use-preload-plugins")
 add_link_options("-lembind")
+add_link_options("SHELL: --source-map-base http://localhost/sourcemap/")
 
 # Our hello world executable
 add_executable( orb_wasm orb_wasm.cpp )

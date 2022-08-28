@@ -26,16 +26,16 @@ Camera.type: "PinHole"
 # Used calculations above with ptam parameters to work them out
 # Camera.fx: 458.654
 # Camera.fx: 1029.69920
-Camera.fx: 1034.0
+Camera.fx: 448.0
 # Camera.fy: 457.296
 # Camera.fy: 1013.51520
-Camera.fy: 1034.0
+Camera.fy: 448.0
 # Camera.cx: 367.215
 # Camera.cx: 327.281120
-Camera.cx : 640.0
+Camera.cx : 320.0
 # Camera.cy: 248.375
 # Camera.cy: 209.124160
-Camera.cy : 384.0
+Camera.cy : 240.0
 
 # Distortion parameters. Not sure about these, are not specified in ptam in the same way, leave for now
 # Camera.k1: -0.28340811
@@ -46,7 +46,7 @@ Camera.k1: 0.3164
 Camera.k2: -1.928
 Camera.p1: 0.0
 Camera.p2: 0.0
-Camera.k3: 3.909
+Camera.k3: 0.0
 
 # Camera.width: 640
 # Camera.height: 480

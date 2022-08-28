@@ -11,7 +11,7 @@ let pollHandle = null;
 let poseMatrix = null; 
 let processVideoHandle = null;
 
-navigator.mediaDevices.getUserMedia({video: {facingMode: 'environment'}}).then (stream => {
+navigator.mediaDevices.getUserMedia({video: {facingMode: 'environment', width: 1366, height: 768}}).then (stream => {
     video1.srcObject = stream;
     video1.play();
     document.getElementById("start").addEventListener("click", e=> {
