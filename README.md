@@ -6,6 +6,10 @@ Please use [the binvoc branch of my own fork of ORB-SLAM3](https://github.com/ni
 
 ## Log
 
+### 2022-08-30
+
+Memory alignment issue seems to be fixed, thanks to the `PROXY_TO_PTHREAD` flag, which runs `main()` on a separate thread. Thanks to @carlodek for this suggestion. Not sure why it fixes the issue though!
+
 ### 2022-06-10
 
 Able to test on an actual Android device now, however some ongoing problems:
