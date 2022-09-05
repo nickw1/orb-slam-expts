@@ -52,7 +52,6 @@ add_link_options("SHELL: --preload-file assets")
 add_link_options("--use-preload-plugins")
 add_link_options("-lembind")
 add_link_options("SHELL: --source-map-base http://localhost/sourcemap/")
-add_compile_options("SHELL: -s PROXY_TO_PTHREAD")
 add_link_options("SHELL: -s PROXY_TO_PTHREAD")
 
 # Our hello world executable
