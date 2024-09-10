@@ -6,6 +6,12 @@ Please use [the binvoc branch of my own fork of ORB-SLAM3](https://github.com/ni
 
 ## Log
 
+### 2024-09-10
+
+Apologies for the lack of updates here for a while.
+
+Due to the emergence of [AlvaAR](https://github.com/alanross/AlvaAR) which offers what I was investigating in this repo, I have not done any updates for a while and it is unlikely this repo will be further updated.
+
 ### 2022-08-30
 
 Memory alignment issue seems to be fixed, thanks to the `PROXY_TO_PTHREAD` flag, which runs `main()` on a separate thread. Thanks to @carlodek for this suggestion. Not sure why it fixes the issue though!
